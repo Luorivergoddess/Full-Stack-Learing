@@ -1,52 +1,55 @@
+/* 设置所有元素的盒子模型为 border-box */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: sans-serif; /* 设置页面默认字体为无衬线字体 */
-    background-color: #f0f0f0; /* 设置页面背景色为浅灰色 */
-  }
-  
-  h1 {
-    color: darkblue;
-    background-color: lightblue; /* 添加浅蓝色背景，以便看清 padding */
-  
-    /* 盒子模型属性 */
-    padding: 15px; /* 上下左右内边距都设为 15px */
-    border: 2px solid darkblue; /* 添加一个 2px 宽的深蓝色实线边框 */
-    margin-bottom: 20px; /* 在 h1 底部添加 20px 的外边距，把它和下面的内容推开 */
-  
-    /* 可以单独设置某个方向的 padding 或 margin */
-    /* padding-top: 10px; */
-    /* padding-bottom: 10px; */
-    /* padding-left: 20px; */
-    /* padding-right: 20px; */
-  
-    /* margin-top: 10px; */
-  }
-  
-  h2 {
-    color: green; /* 将副标题颜色改为绿色 */
-  }
-  
-  li {
-    color: #333; /* 将列表项文字颜色改为深灰色 (#333 是灰色的另一种写法) */
-  }
-  
-  a {
-    color: purple; /* 将链接颜色改为紫色 */
-    text-decoration: none; /* 去掉链接下划线 */
-  }
-  
-  a:hover { /* :hover 是一个伪类，表示鼠标悬停在链接上时的样式 */
-      color: red; /* 鼠标悬停时链接变为红色 */
-      text-decoration: underline; /* 鼠标悬停时添加下划线 */
-  }
-  /* ... 保留之前的样式 ... */
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+}
 
-/* ID 选择器：选中 id 为 "contact-section" 的元素 */
+h1 {
+  color: darkblue;
+  background-color: lightblue;
+  padding: 15px;
+  border: 2px solid darkblue;
+  margin-bottom: 20px;
+  width: 500px;
+  text-align: center;
+}
+
+h2 {
+  color: green;
+}
+
+li {
+  color: #333;
+}
+
+a {
+  color: purple;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+img {
+  border: 5px solid gray;
+  padding: 5px;
+  background-color: white;
+  display: block;
+  margin: 15px auto 0;
+}
+
 #contact-section {
-    border-bottom: 2px dashed rgb(33, 33, 219); /* 添加一个深蓝色的虚线下边框 */
-    padding-bottom: 5px; /* 添加一点下内边距，让边框和文字有点距离 */
-  }
+  border-bottom: 2px dashed rgb(33, 33, 219);
+  padding-bottom: 5px;
+}
 
-  .highlight {
-    background-color: yellow; /* 给这些列表项添加黄色背景 */
-    font-weight: bold;      /* 让字体加粗 */
-  }
+.highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
