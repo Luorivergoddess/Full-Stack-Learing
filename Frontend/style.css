@@ -1,26 +1,26 @@
 body {
-  font-family: sans-serif; /* 设置页面默认字体为无衬线字体 */
-  background-color: #f0f0f0; /* 设置页面背景色为浅灰色 */
-}
-
-h1 {
-  color: darkblue; /* 将主标题颜色改为深蓝色 */
-}
-
-h2 {
-  color: green; /* 将副标题颜色改为绿色 */
-}
-
-li {
-  color: #333; /* 将列表项文字颜色改为深灰色 (#333 是灰色的另一种写法) */
-}
-
-a {
-  color: purple; /* 将链接颜色改为紫色 */
-  text-decoration: none; /* 去掉链接下划线 */
-}
-
-a:hover { /* :hover 是一个伪类，表示鼠标悬停在链接上时的样式 */
-    color: red; /* 鼠标悬停时链接变为红色 */
-    text-decoration: underline; /* 鼠标悬停时添加下划线 */
-}
+    font-family: sans-serif; /* 设置页面默认字体为无衬线字体 */
+    background-color: #f0f0f0; /* 设置页面背景色为浅灰色 */
+  }
+  
+  h1 {
+    color: darkblue; /* 将主标题颜色改为深蓝色 */
+  }
+  
+  h2 {
+    color: green; /* 将副标题颜色改为绿色 */
+  }
+  
+  li {
+    color: #333; /* 将列表项文字颜色改为深灰色 (#333 是灰色的另一种写法) */
+  }
+  
+  a {
+    color: purple; /* 将链接颜色改为紫色 */
+    text-decoration: none; /* 去掉链接下划线 */
+  }
+  
+  a:hover { /* :hover 是一个伪类，表示鼠标悬停在链接上时的样式 */
+      color: red; /* 鼠标悬停时链接变为红色 */
+      text-decoration: underline; /* 鼠标悬停时添加下划线 */
+  }
