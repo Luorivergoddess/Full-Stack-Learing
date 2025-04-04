@@ -4,7 +4,21 @@ body {
   }
   
   h1 {
-    color: darkblue; /* 将主标题颜色改为深蓝色 */
+    color: darkblue;
+    background-color: lightblue; /* 添加浅蓝色背景，以便看清 padding */
+  
+    /* 盒子模型属性 */
+    padding: 15px; /* 上下左右内边距都设为 15px */
+    border: 2px solid darkblue; /* 添加一个 2px 宽的深蓝色实线边框 */
+    margin-bottom: 20px; /* 在 h1 底部添加 20px 的外边距，把它和下面的内容推开 */
+  
+    /* 可以单独设置某个方向的 padding 或 margin */
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
+    /* padding-left: 20px; */
+    /* padding-right: 20px; */
+  
+    /* margin-top: 10px; */
   }
   
   h2 {
@@ -23,4 +37,16 @@ body {
   a:hover { /* :hover 是一个伪类，表示鼠标悬停在链接上时的样式 */
       color: red; /* 鼠标悬停时链接变为红色 */
       text-decoration: underline; /* 鼠标悬停时添加下划线 */
+  }
+  /* ... 保留之前的样式 ... */
+
+/* ID 选择器：选中 id 为 "contact-section" 的元素 */
+#contact-section {
+    border-bottom: 2px dashed rgb(33, 33, 219); /* 添加一个深蓝色的虚线下边框 */
+    padding-bottom: 5px; /* 添加一点下内边距，让边框和文字有点距离 */
+  }
+
+  .highlight {
+    background-color: yellow; /* 给这些列表项添加黄色背景 */
+    font-weight: bold;      /* 让字体加粗 */
   }
