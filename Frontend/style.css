@@ -22,10 +22,6 @@ h2 {
   color: green;
 }
 
-li {
-  color: #333;
-}
-
 a {
   color: purple;
   text-decoration: none;
@@ -53,3 +49,61 @@ img {
   background-color: yellow;
   font-weight: bold;
 }
+
+.important {
+  border-left: 3px solid red;
+  padding-left: 12px;
+}
+
+ul { /* 这是 Flex Container */
+    list-style: none; /* 去掉默认的项目符号 */
+    padding: 10px;    /* 给容器一点内边距 */
+    margin: 0; /* 重置外边距 */
+    border: 1px solid blue; /* 容器边框 */
+    background-color: #eee; /* 容器背景色 */
+  
+    /* === 关键：启用 Flexbox === */
+    display: flex;
+  
+    /* === Flex Container 属性 === */
+  
+    /* flex-direction: 控制项目排列方向 (主轴) */
+    flex-direction: row; /* 'row' (默认): 水平排列 | 'column': 垂直排列 | 'row-reverse' | 'column-reverse' */
+  
+    /* justify-content: 控制项目在 主轴 上的对齐方式 */
+    /* justify-content: flex-start; */ /* (默认) 靠左/上对齐 */
+    /* justify-content: flex-end; */   /* 靠右/下对齐 */
+    /* justify-content: center; */    /* 居中对齐 */
+     justify-content: space-around; /* 项目均匀分布，两端留有一半间距 */
+    /* justify-content: space-between; */ /* 项目均匀分布，两端不留间距 */
+    /* justify-content: space-evenly; */  /* 项目均匀分布，所有间距相等 */
+  
+    /* align-items: 控制项目在 交叉轴 上的对齐方式 (如果项目有多行高度不同，效果更明显) */
+    align-items: center; /* 'stretch' (默认，如果项目没高度会撑满容器) | 'flex-start' | 'flex-end' | 'center' | 'baseline' */
+  
+    /* flex-wrap: 控制项目是否换行 */
+    flex-wrap: wrap; /* 'nowrap' (默认): 不换行，可能会溢出 | 'wrap': 空间不够时换行 | 'wrap-reverse' */
+  }
+  
+li { /* 这是 Flex Item */
+color: #333;
+/* display: inline-block; <--- 不再需要这个 */
+margin: 5px; /* 每个项目的外边距 */
+padding: 8px 12px;
+border: 1px solid green; /* 项目边框 */
+background-color: lightcyan; /* 项目背景色 */
+
+/* Flex Items 也可以有自己的属性，比如 flex-grow, flex-shrink, order 等，暂时先不深入 */
+}
+
+/* 之前的 .highlight 和 .important 样式依然有效 */
+.highlight {
+background-color: yellow;
+font-weight: 700;
+}
+.important {
+    border-left: 3px solid red;
+    padding-left: 12px;
+}
+
+/* ... 其他样式保持不变 ... */
