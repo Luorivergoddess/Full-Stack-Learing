@@ -3,25 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Protomyst</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Animated Weather Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin-bottom: 30px;
+        }
+
+        .weather-card {
+            width: 250px;
+            height: 350px;
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card-header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-content {
+            position: relative;
+            height: calc(100% - 56px);
+            overflow: hidden;
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            background-color: #3a3a3a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #4a4a4a;
+        }
+
+        button.active {
+            background-color: #5a5a5a;
+        }
+
+        /* Wind Animation */
+        .wind .card-content {
+            background: linear-gradient(180deg, #7cb3e8 0%, #9fcbf1 100%);
+        }
+
+        .cloud {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .cloud-1 {
+            width: 60px;
+            height: 25px;
+            top: 40px;
+            left: -60px;
+            animation: moveCloud 15s linear infinite;
+        }
+
+        .cloud-1::before {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            left: 12px;
+        }
+
+        .cloud-1::after {
+            width: 20px;
+            height: 20px;
+            top: -10px;
+            left: 32px;
+        }
+
+        .cloud-2 {
+            width: 80px;
+            height: 30px;
+            top: 100px;
+            left: -80px;
+            animation: moveCloud 12s linear infinite;
+            animation-delay: 2s;
+        }
+
+        .cloud-2::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 15px;
+        }
+
+        .cloud-2::after {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            left: 42px;
+        }
+
+        .cloud-3 {
+            width: 50px;
+            height: 20px;
+            top: 150px;
+            left: -50px;
+            animation: moveCloud 10s linear infinite;
+            animation-delay: 5s;
+        }
+
+        .cloud-3::before {
+            width: 25px;
+            height: 25px;
+            top: -12px;
+            left: 10px;
+        }
+
+        .cloud-3::after {
+            width: 18px;
+            height: 18px;
+            top: -9px;
+            left: 27px;
+        }
+
+        .wind-line {
+            position: absolute;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.5);
+            animation: windLine 3s linear infinite;
+        }
+
+        .wind-line-1 {
+            width: 30px;
+            top: 80px;
+            left: -30px;
+        }
+
+        .wind-line-2 {
+            width: 50px;
+            top: 130px;
+            left: -50px;
+            animation-delay: 1s;
+        }
+
+        .wind-line-3 {
+            width: 40px;
+            top: 170px;
+            left: -40px;
+            animation-delay: 2s;
+        }
+
+        @keyframes moveCloud {
+            0% {
+                transform: translateX(-10px);
+                left: -80px;
+            }
+            100% {
+                transform: translateX(350px);
+            }
+        }
+
+        @keyframes windLine {
+            0% {
+                left: -50px;
+            }
+            100% {
+                left: 300px;
+            }
+        }
+
+        /* Rain Animation */
+        .rain .card-content {
+            background: linear-gradient(180deg, #2c3e50 0%, #3d5872 100%);
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background-color: rgba(255, 255, 255, 0.6);
+            top: -15px;
+            animation: rain linear infinite;
+        }
+
+        @keyframes rain {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(350px) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Sun Animation */
+        .sun .card-content {
+            background: linear-gradient(180deg, #f5af19 0%, #f12711 100%);
+            overflow: hidden;
+        }
+
+        .sun-circle {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #ffdb57;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 50px 20px rgba(255, 219, 87, 0.6);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 2px;
+            width: 100px;
+            background: linear-gradient(to right, rgba(255, 219, 87, 1), rgba(255, 219, 87, 0));
+            transform-origin: 0 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 50px 20px rgba(255, 219, 87, 0.6);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                box-shadow: 0 0 70px 30px rgba(255, 219, 87, 0.8);
+            }
+        }
+
+        /* Snow Animation */
+        .snow .card-content {
+            background: linear-gradient(180deg, #5d6d7c 0%, #98a4b2 100%);
+        }
+
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 15px;
+            top: -20px;
+            animation: snow linear infinite;
+        }
+
+        @keyframes snow {
+            0% {
+                transform: translateY(0) rotate(0) translateX(0);
+                opacity: 1;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(350px) rotate(360deg) translateX(20px);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>About Me - Protomyst</h1>
-    <h2>My Profile</h2>
-    <p>Welcome to my personal page! I am Protomyst, a passionate developer and tech enthusiast.</p>
-    <h2>My Interests</h2>
-    <ul>
-        <li>Web Development</li>
-        <li class="highlight">Artificial Intelligence</li>
-        <li>Open Source Projects</li>
-        <li>Gaming</li>
-        <li>Music</li>
-    </ul>
-    <h2 id="contact-section">Contact Me</h2>
-    <a href="https://protomyst.com">Visit my website here.</a>
-    <!-- Add an empty line -->
-    <br><br>
-    <img src="https://avatars.githubusercontent.com/u/188672497?v=4" alt="My Photo" width="200" height="200">
+    <h1>Weather Animations</h1>
+    
+    <div class="container">
+        <div class="weather-card wind" id="card1">
+            <div class="card-header">Wind</div>
+            <div class="card-content">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="cloud cloud-3"></div>
+                <div class="wind-line wind-line-1"></div>
+                <div class="wind-line wind-line-2"></div>
+                <div class="wind-line wind-line-3"></div>
+            </div>
+        </div>
+
+        <div class="weather-card rain" id="card2">
+            <div class="card-header">Rain</div>
+            <div class="card-content" id="rain-container">
+                <!-- Raindrops will be added by JS -->
+            </div>
+        </div>
+
+        <div class="weather-card sun" id="card3">
+            <div class="card-header">Sun</div>
+            <div class="card-content">
+                <div class="sun-circle"></div>
+                <!-- Sun rays will be added by JS -->
+            </div>
+        </div>
+
+        <div class="weather-card snow" id="card4">
+            <div class="card-header">Snow</div>
+            <div class="card-content" id="snow-container">
+                <!-- Snowflakes will be added by JS -->
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="btn-all" class="active">Show All</button>
+        <button id="btn-wind">Wind</button>
+        <button id="btn-rain">Rain</button>
+        <button id="btn-sun">Sun</button>
+        <button id="btn-snow">Snow</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create raindrops
+            const rainContainer = document.getElementById('rain-container');
+            for (let i = 0; i < 50; i++) {
+                const raindrop = document.createElement('div');
+                raindrop.className = 'raindrop';
+                raindrop.style.left = `${Math.random() * 100}%`;
+                raindrop.style.animationDuration = `${0.7 + Math.random() * 0.5}s`;
+                raindrop.style.animationDelay = `${Math.random() * 2}s`;
+                rainContainer.appendChild(raindrop);
+            }
+
+            // Create sun rays
+            const sunContent = document.querySelector('.sun .card-content');
+            for (let i = 0; i < 12; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'ray';
+                ray.style.transform = `rotate(${i * 30}deg)`;
+                sunContent.appendChild(ray);
+            }
+
+            // Create snowflakes
+            const snowContainer = document.getElementById('snow-container');
+            const snowflakeChars = ['❄', '❅', '❆', '✻', '✼'];
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.animationDuration = `${5 + Math.random() * 10}s`;
+                snowflake.style.animationDelay = `${Math.random() * 5}s`;
+                snowflake.style.opacity = Math.random() * 0.5 + 0.5;
+                snowflake.style.fontSize = `${10 + Math.random() * 10}px`;
+                snowContainer.appendChild(snowflake);
+            }
+
+            // Weather switching functionality
+            const btnAll = document.getElementById('btn-all');
+            const btnWind = document.getElementById('btn-wind');
+            const btnRain = document.getElementById('btn-rain');
+            const btnSun = document.getElementById('btn-sun');
+            const btnSnow = document.getElementById('btn-snow');
+            
+            const cards = document.querySelectorAll('.weather-card');
+            
+            function showAllCards() {
+                cards.forEach(card => {
+                    card.style.display = 'block';
+                });
+                
+                updateButtons(btnAll);
+            }
+            
+            function showOnlyWeather(weatherType) {
+                cards.forEach(card => {
+                    if (card.classList.contains(weatherType)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                const activeButton = {
+                    'wind': btnWind,
+                    'rain': btnRain,
+                    'sun': btnSun,
+                    'snow': btnSnow
+                }[weatherType];
+                
+                updateButtons(activeButton);
+            }
+            
+            function updateButtons(activeBtn) {
+                [btnAll, btnWind, btnRain, btnSun, btnSnow].forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                activeBtn.classList.add('active');
+            }
+            
+            btnAll.addEventListener('click', showAllCards);
+            btnWind.addEventListener('click', () => showOnlyWeather('wind'));
+            btnRain.addEventListener('click', () => showOnlyWeather('rain'));
+            btnSun.addEventListener('click', () => showOnlyWeather('sun'));
+            btnSnow.addEventListener('click', () => showOnlyWeather('snow'));
+        });
+    </script>
 </body>
 </html>
